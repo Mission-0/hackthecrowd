@@ -1,4 +1,4 @@
-import  { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/Button';
@@ -14,9 +14,9 @@ export default function Home() {
   }, []);
 
   const featuredProjects = [
-    { id: 1, title: "EcoTech Innovation", description: "Sustainable technology solutions for urban environments", fundingGoal: 50000, currentFunding: 35000, category: "Technology" },
-    { id: 2, title: "ArtSpace VR", description: "Virtual reality platform for artists to showcase their work", fundingGoal: 30000, currentFunding: 22000, category: "Art" },
-    { id: 3, title: "HealthTrack AI", description: "AI-powered health monitoring and prediction system", fundingGoal: 75000, currentFunding: 60000, category: "Healthcare" },
+    { id: "1", title: "EcoTech Innovation", description: "Sustainable technology solutions for urban environments", fundingGoal: 50000, currentFunding: 35000, category: "Technology" },
+    { id: "2", title: "ArtSpace VR", description: "Virtual reality platform for artists to showcase their work", fundingGoal: 30000, currentFunding: 22000, category: "Art" },
+    { id: "3", title: "HealthTrack AI", description: "AI-powered health monitoring and prediction system", fundingGoal: 75000, currentFunding: 60000, category: "Healthcare" },
   ];
 
   const categories = ["Technology", "Art", "Healthcare", "Education", "Environment"];
@@ -56,12 +56,9 @@ export default function Home() {
         >
           <h1 className="text-5xl font-bold mb-4 text-cyan-200">Fund the Future, Milestone by Milestone</h1>
           <p className="text-xl mb-8 text-cyan-100">Decentralized crowdfunding with accountability and transparency</p>
-          <Link to="/projects">
-          
-          <Button className="bg-cyan-600 hover:bg-cyan-700 text-white ">
+          <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
             Explore Projects <ArrowRight className="ml-2" />
           </Button>
-          </Link>
         </motion.section>
 
         <section className="mb-16">
