@@ -1,43 +1,50 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+datasource db {
+  provider = "postgresql" // Replace with the appropriate provider if you're using something else
+  url      = env("DATABASE_URL") // Use your environment variable to point to the database URL
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+model User {
+  id            Int       @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String    @unique
+  userName      String
+  genderId      Int
+  phoneNumber   String
+  password      String
+  walletAddress String?
+  projects      Project[]
+  votes         Vote[] // This line adds a relation to Vote
 }
 
-model User{
-  id String @unique @default(uuid())
-  firstName String 
-  lastName String
-  email String @unique 
-  userName String @unique
-  gender Gender
-  phoneNumber String @unique
-  password String 
-  Projects Projects[]
-  WalletAddress String
+model Project {
+  id         Int         @id @default(autoincrement())
+  name       String
+  amount     Float
+  userId     Int
+  countDown  DateTime
+  milestones Milestone[]
+  raisedBy   User        @relation(fields: [userId], references: [id])
 }
 
-model Projects{
-  id String @unique @default(uuid())
-  Name String 
-  Amount Int 
-  raisedBy User @relation(fields: [id], references: [id])
-  CountDown DateTime
-  
-
+model Milestone {
+  id          Int      @id @default(autoincrement())
+  description String
+  dueDate     DateTime
+  completed   Boolean  @default(false)
+  votes       Vote[]
+  projectId   Int
+  project     Project  @relation(fields: [projectId], references: [id])
 }
 
-enum Gender{
-  Male
-  Female
-  Other
+model Vote {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  milestoneId Int
+  user        User      @relation(fields: [userId], references: [id])
+  milestone   Milestone @relation(fields: [milestoneId], references: [id])
 }
