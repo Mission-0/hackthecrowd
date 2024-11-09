@@ -1,13 +1,15 @@
-import express from "express";
-import 'dotenv/config'
-import healthCheker from "./controllers/healthcheck.controller";
-
-const port = process.env.PORT || 3000;
+import express from 'express';
+import authRoutes from './routes/authRoutes';
+import projectRoutes from './routes/projectRoutes';
+import bodyParser from 'body-parser';
 
 const app = express();
+app.use(bodyParser.json());
 
-app.get("/", healthCheker);
+app.use('/api/auth', authRoutes);
+app.use('/api/projects', projectRoutes);
 
-app.listen(port,()=>{
-    console.log(`App is serving on ${port}`);
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
