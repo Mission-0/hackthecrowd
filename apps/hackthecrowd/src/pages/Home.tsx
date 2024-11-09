@@ -56,9 +56,12 @@ export default function Home() {
         >
           <h1 className="text-5xl font-bold mb-4 text-cyan-200">Fund the Future, Milestone by Milestone</h1>
           <p className="text-xl mb-8 text-cyan-100">Decentralized crowdfunding with accountability and transparency</p>
-          <Button size="lg" className="bg-cyan-600 hover:bg-cyan-700 text-white">
+          <Link to="/projects">
+          
+          <Button className="bg-cyan-600 hover:bg-cyan-700 text-white ">
             Explore Projects <ArrowRight className="ml-2" />
           </Button>
+          </Link>
         </motion.section>
 
         <section className="mb-16">
